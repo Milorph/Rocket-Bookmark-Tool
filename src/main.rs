@@ -16,8 +16,8 @@ fn index() -> &'static str {
 fn search(cmd: String) -> Redirect {
     let command = utils::get_command_from_query_string(&cmd);
     let redirect_url = match command {
-        "tw" => String::from("https://twitter.com"),
-        _ => String::from("https:://google.com"),
+        "tw" => utils::twitter::construct_twitter_url(&cmd),
+        _ => utils::google::construct_google_search_from_query(&cmd),
     };
 
     Redirect::to(redirect_url)
